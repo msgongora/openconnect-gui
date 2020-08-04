@@ -1,0 +1,19 @@
+# Add one IP to the list of split tunnel
+add_ip ()
+{
+    export CISCO_SPLIT_INC_${CISCO_SPLIT_INC}_ADDR=$1
+    export CISCO_SPLIT_INC_${CISCO_SPLIT_INC}_MASK=255.255.255.255
+    export CISCO_SPLIT_INC_${CISCO_SPLIT_INC}_MASKLEN=32
+    export CISCO_SPLIT_INC=$(($CISCO_SPLIT_INC + 1))
+}
+
+extra_addrs="
+__IP_1__
+__IP_2__
+"
+
+IFS=$'\n';
+for i in ${extra_addrs}; do
+    add_ip $i 
+done
+unset IFS
